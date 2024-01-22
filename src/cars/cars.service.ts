@@ -1,15 +1,15 @@
 import { Injectable } from '@nestjs/common';
-import { CreateProductDto } from './dto/create-product.dto';
-import { UpdateProductDto } from './dto/update-product.dto';
+import { CreateCarDto } from './dto/create-car.dto';
+import { UpdateCarDto } from './dto/update-car.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { NotFoundError } from 'src/errors';
 
 @Injectable()
-export class ProductsService {
+export class CarsService {
   constructor(private prismaService: PrismaService) {}
-  create(createProductDto: CreateProductDto) {
+  create(createCarDto: CreateCarDto) {
     return this.prismaService.product.create({
-      data: { ...createProductDto, quantity: 0 },
+      data: { ...createCarDto, quantity: 0 },
     });
   }
 
@@ -29,11 +29,11 @@ export class ProductsService {
     }
   }
 
-  async update(id: number, updateProductDto: UpdateProductDto) {
+  async update(id: number, updateCarDto: UpdateCarDto) {
     try {
       return await this.prismaService.product.update({
         where: { id },
-        data: updateProductDto,
+        data: updateCarDto,
       });
     } catch (error) {
       if (error.code === 'P2025') {
