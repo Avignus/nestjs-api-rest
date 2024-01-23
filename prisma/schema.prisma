@@ -10,27 +10,15 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Product {
-  id          Int           @id @default(autoincrement())
-  name        String
-  price       Float
-  quantity    Int
-  StockInput  StockInput[]
-  StockOutput StockOutput[]
-}
-
-model StockInput {
-  id        Int      @id @default(autoincrement())
-  productId Int
-  quantity  Int
-  date      DateTime
-  Product   Product  @relation(fields: [productId], references: [id])
-}
-
-model StockOutput {
-  id        Int      @id @default(autoincrement())
-  productId Int
-  quantity  Int
-  date      DateTime
-  Product   Product  @relation(fields: [productId], references: [id])
+model Car {
+  id       Int    @id @default(autoincrement())
+  maker    String
+  model    String
+  package  String
+  color    String
+  year     String
+  category String
+  mileage  Int
+  price    Int
+  imgUrl   String
 }

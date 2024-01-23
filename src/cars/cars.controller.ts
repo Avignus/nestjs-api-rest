@@ -6,19 +6,18 @@ import {
   Patch,
   Param,
   Delete,
-  HttpCode,
 } from '@nestjs/common';
 import { CarsService } from './cars.service';
 import { CreateCarDto } from './dto/create-car.dto';
 import { UpdateCarDto } from './dto/update-car.dto';
 
-@Controller('products')
-export class ProductsController {
+@Controller('cars')
+export class CarsController {
   constructor(private readonly carsService: CarsService) {}
 
   @Post()
-  create(@Body() createProductDto: CreateCarDto) {
-    return this.carsService.create(createProductDto);
+  create(@Body() createCarDto: CreateCarDto) {
+    return this.carsService.create(createCarDto);
   }
 
   @Get()
@@ -37,8 +36,7 @@ export class ProductsController {
   }
 
   @Delete(':id')
-  @HttpCode(204)
   remove(@Param('id') id: string) {
-    this.carsService.remove(+id);
+    return this.carsService.remove(+id);
   }
 }

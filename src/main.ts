@@ -11,6 +11,7 @@ async function bootstrap() {
     }),
   );
   app.useGlobalFilters(new NotFoundErrorFilter());
+  app.enableCors();
   await app.listen(3000);
 }
 

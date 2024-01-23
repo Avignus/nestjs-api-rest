@@ -7,19 +7,14 @@ import { NotFoundError } from 'src/errors';
 @Injectable()
 export class CarsService {
   constructor(private prismaService: PrismaService) {}
-  create(createCarDto: CreateCarDto) {
-    return this.prismaService.product.create({
-      data: { ...createCarDto, quantity: 0 },
-    });
-  }
 
   findAll() {
-    return this.prismaService.product.findMany();
+    return this.prismaService.car.findMany();
   }
 
   async findOne(id: number) {
     try {
-      return await this.prismaService.product.findUniqueOrThrow({
+      return await this.prismaService.car.findUniqueOrThrow({
         where: { id },
       });
     } catch (error) {
@@ -29,26 +24,39 @@ export class CarsService {
     }
   }
 
-  async update(id: number, updateCarDto: UpdateCarDto) {
+  async create(createCarDto: CreateCarDto) {
     try {
-      return await this.prismaService.product.update({
+      const createdCar = await this.prismaService.car.create({
+        data: createCarDto,
+      });
+      return createdCar;
+    } catch (error) {
+      // Handle potential errors gracefully
+      console.error('Error creating car:', error);
+      throw new Error('Failed to create car'); // Replace with a more specific error if needed
+    }
+  }
+
+  async update(id: number, updateProductDto: UpdateCarDto) {
+    try {
+      return await this.prismaService.car.update({
         where: { id },
-        data: updateCarDto,
+        data: updateProductDto,
       });
     } catch (error) {
       if (error.code === 'P2025') {
-        throw new NotFoundError(`Product with ID ${id} not found`);
+        throw new NotFoundError(`Car with ID ${id} not found`);
       }
     }
   }
   async remove(id: number) {
     try {
-      return this.prismaService.product.delete({
+      return this.prismaService.car.delete({
         where: { id },
       });
     } catch (error) {
       if (error.code === 'P2025') {
-        throw new NotFoundError(`Product with ID ${id} not found`);
+        throw new NotFoundError(`Car with ID ${id} not found`);
       }
     }
   }
