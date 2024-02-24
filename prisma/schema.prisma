@@ -18,7 +18,7 @@ model Car {
   color    String
   year     String
   category String
-  mileage  Int
-  price    Int
+  mileage  String
+  price    String
   imgUrl   String
 }

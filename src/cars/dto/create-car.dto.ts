@@ -1,8 +1,6 @@
 import {
   IsNotEmpty,
-  IsNumber,
   IsOptional,
-  IsPositive,
   IsString,
   MaxLength,
   MinLength,
@@ -53,12 +51,11 @@ export class CreateCarDto {
   @IsNotEmpty()
   category: string;
 
-  @IsNumber({ maxDecimalPlaces: 2 })
+  @IsString()
   @IsNotEmpty()
-  mileage: number;
+  mileage: string;
 
-  @IsPositive()
   @IsNotEmpty()
-  @IsNumber({ maxDecimalPlaces: 2 })
-  price: number;
+  @IsString()
+  price: string;
 }

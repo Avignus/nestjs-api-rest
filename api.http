@@ -12,7 +12,7 @@ Content-Type: application/json
   "price": 100
 }
 ###
-PATCH http://localhost:3000/products/1
+PATCH http://localhost:3002/cars/1
 Content-Type: application/json
 
 {
